@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Lấy Proxy từ API</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+    input, button, textarea {
+      padding: 10px; margin-top: 10px; width: 100%;
+    }
+    button { width: 32%; margin-right: 1%; }
+    #result { height: 100px; }
+  </style>
+</head>
+<body>
+  <h2>Lấy Proxy từ API</h2>
+  <input type="text" id="apiUrl" placeholder="Nhập link API" value="https://proxyxoay.shop/api/get.php?key=gAaElqzzsHHbSJKPNgLiwZ&&nhamang=random&&tinhthanh=0">
+  <div style="display: flex; justify-content: space-between;">
+    <button onclick="getProxy()">Lấy Proxy</button>
+    <button onclick="copyData()">Copy</button>
+    <button onclick="resetForm()">Reset</button>
+  </div>
+  <textarea id="result" placeholder="Kết quả proxy sẽ hiển thị tại đây..."></textarea>
+
+  <script>
+     // document.getElementById('apiUrl').value = '';
+     // document.getElementById('result').value = '';
+    
+    async function getProxy() {
+      urlapi = document.getElementById('apiUrl').value;
+      fetch(urlapi)
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        document.getElementById('result').value = response.status;
+        return;
+      }
+      // parse response data
+      response.json().then(data => {
+        document.getElementById('result').value = data;
+      })
+    }
+  )
+  .catch(err => {
+    document.getElementById('result').value = err;
+  });
+    
+  
+  //document.getElementById('result').value = response.json();
+    
+    
+    };
+
+
+
+  </script>
+</body>
+</html>
